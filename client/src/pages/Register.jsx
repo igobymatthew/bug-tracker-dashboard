@@ -6,7 +6,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await axios.post('http://localhost:5000/api/users/register', form);
+    await axios.post('https://bugtracker-api.onrender.com/api/users/register', form);
 
     window.location.href = '/login';
   };

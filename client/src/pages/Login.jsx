@@ -6,7 +6,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await axios.post('http://localhost:5000/api/users/login', form);
+    const res = await axios.post('https://bugtracker-api.onrender.com/api/users/login', form);
 
     localStorage.setItem('token', res.data.token);
     window.location.href = '/';
