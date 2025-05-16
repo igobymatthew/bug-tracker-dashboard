@@ -1,0 +1,20 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Backend: Node.js",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/server/api/app.js",
+      "skipFiles": ["<node_internals>/**"],
+      "cwd": "${workspaceFolder}/server/api"
+    },
+    {
+      "name": "Python Microservice",
+      "type": "python",
+      "request": "launch",
+      "program": "${workspaceFolder}/server/python_service/app.py",
+      "console": "integratedTerminal"
+    }
+  ]
+}

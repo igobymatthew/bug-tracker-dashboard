@@ -1,0 +1,29 @@
+services:
+  - type: web
+    name: bug-tracker-backend
+    env: node
+    plan: free
+    buildCommand: cd server/api && npm install
+    startCommand: node app.js
+    envVars:
+      - key: MONGO_URI
+        value: mongodb+srv://<your-cluster-uri>/bugtracker
+      - key: JWT_SECRET
+        value: your_jwt_secret
+    autoDeploy: true
+
+  - type: web
+    name: bug-tracker-frontend
+    env: node
+    plan: free
+    buildCommand: cd client && npm install && npm run build
+    startCommand: npx serve -s client/dist
+    autoDeploy: true
+
+  - type: web
+    name: python-notifier
+    env: python
+    plan: free
+    buildCommand: pip install -r server/python_service/requirements.txt
+    startCommand: python server/python_service/app.py
+    autoDeploy: true
