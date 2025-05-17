@@ -7,9 +7,9 @@ services:
     startCommand: node app.js
     envVars:
       - key: MONGO_URI
-        value: mongodb+srv://igobymatthew:18LC8UOK4sFeHREf@bugtracker-cluster.xxxxx.mongodb.net/bugtracker?retryWrites=true&w=majority
+        value: mongodb+srv://igobymatthew:*****@bugtracker-cluster.xxxxx.mongodb.net/bugtracker?retryWrites=true&w=majority
       - key: JWT_SECRET
-        value: BugAppJWT987!
+        value: *****
     autoDeploy: true
     region: oregon
 
