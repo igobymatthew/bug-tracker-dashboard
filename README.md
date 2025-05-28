@@ -1,115 +1,123 @@
+# 🐞 Bug Tracker Dashboard
 
-# Bug Tracker Dashboard
+A full-stack web application for tracking software bugs, designed to demonstrate proficiency in frontend, backend, database management, and cloud deployment workflows.
 
-A full-stack bug tracking web application designed to demonstrate proficiency across frontend, backend, databases, and DevOps.
+---
 
-## Features
-- User authentication
-- Bug creation, listing, filtering
-- Role-based access control
-- Dashboard analytics
-- Email notifications via Python microservice
-- Optional background worker for data import (Java/C#)
-- GraphQL support
-- Redis caching
-- Dockerized services with NGINX reverse proxy
-- CI/CD with GitHub Actions
+## ✅ Features
 
-## Tech Stack
+- User authentication (JWT)
+- Bug creation, listing, and filtering
+- Role-based access control (admin/user)
+- Dashboard UI for managing bug reports
+- MongoDB-backed persistence
+- Seed scripts for user/bug generation
+- Role change automation via CLI
+- Full deployment via Render using Dockerized MongoDB (local) and Vite + Express (production)
+
+---
+
+## 🧱 Tech Stack
 
 ### Frontend
-- React
+- React + Vite
 - Axios
-- Bootstrap/Tailwind CSS
+- Tailwind CSS
 
 ### Backend
 - Node.js + Express
-- Flask (Python)
-- Java (optional background service)
+- Mongoose (MongoDB ODM)
+- JWT for authentication
+- REST API architecture
 
 ### Database
-- MongoDB
-- PostgreSQL or MySQL
-- Redis
+- MongoDB (local via Docker or hosted via Atlas)
 
 ### DevOps
-- Docker, Docker Compose
-- NGINX
-- GitHub Actions
-- AWS/GCP optional deployment
+- Docker (MongoDB containerized locally)
+- Render (deployed backend + static frontend build)
+- GitHub for version control
+- CLI seed tools for role management
 
-## Setup
+---
 
-1. **Clone the repo**
+## 🛠 Getting Started (Local Development)
+
+### 1. Spin up MongoDB locally
 ```bash
-git clone https://github.com/yourusername/bug-tracker-dashboard.git
-cd bug-tracker-dashboard
+docker run -d -p 27017:27017 --name mongo mongo
 ```
 
-2. **Docker**
+### 2. Seed database
 ```bash
-docker-compose up --build
+cd server
+node scripts/seed.js
 ```
 
-3. **Frontend**
-```bash
-cd client
-npm install
-npm run dev
-```
-
-4. **Backend**
+### 3. Start the backend server
 ```bash
 cd server/api
 npm install
 npm start
 ```
 
-5. **Python Microservice**
+### 4. Start the frontend client
 ```bash
-cd server/python_service
-pip install -r requirements.txt
-python app.py
+cd client
+npm install
+npm run dev
 ```
 
-## Folder Structure
-
-- `client/`: React frontend
-- `server/api/`: Express REST API
-- `server/python_service/`: Python notification service
-- `server/graphql/`: GraphQL API service
-- `docker/`: Docker and Compose files
-- `nginx/`: NGINX configuration
-- `.github/workflows/`: CI/CD setup
-
-## License
-MIT License
----
-
-## MongoDB Setup with Atlas
-
-1. Go to [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas)
-2. Create a free cluster
-3. Create a new database user
-4. Allow IP access from anywhere (0.0.0.0/0)
-5. Copy your connection string and replace `<username>`, `<password>`, and `<dbname>`
-
-Example:
-```
-MONGO_URI=mongodb+srv://myuser:mypass@cluster0.mongodb.net/bugtracker
-```
-
-Add this to your `.env` or Render environment settings.
+Frontend: `http://localhost:5173`  
+Backend API: `http://localhost:5000/api`
 
 ---
 
-## Seeding the Database
+## 🚀 Deployment (Render)
 
-To populate with test data (users, bugs), run:
+### 1. Create a new Web Service on [Render.com](https://render.com)
 
+- **Root directory**: `server/api`
+- **Start command**: `npm start`
+- **Environment Variables**:
+  - `MONGO_URI`: your Atlas DB URI
+  - `JWT_SECRET`: random secure string
+
+### 2. Deploy static client
+
+- Build locally:
+  ```bash
+  cd client
+  npm run build
+  ```
+- Upload `/dist` to a new **Static Site** on Render
+
+---
+
+## 🔧 Utility Scripts
+
+### Change role from user → admin
 ```bash
-node server/scripts/seed.js
+node scripts/roleChanger.js promote <username>
 ```
 
-- Admin login: `admin@example.com` / `password123`
-- User login: `jane@example.com` / `password123`
+### Change role from admin → user
+```bash
+node scripts/roleChanger.js demote <username>
+```
+
+---
+
+## 📦 Future Enhancements
+
+- Add email notifications via microservice (Python)
+- Redis caching layer for query optimization
+- Optional background worker (Java/C#) for analytics
+- GraphQL endpoint support
+- CI/CD integration via GitHub Actions
+
+---
+
+## 📄 License
+
+MIT
